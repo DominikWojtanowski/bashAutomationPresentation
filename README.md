@@ -37,7 +37,7 @@ assosciative array (tablica gdzie indexami sa stringi, zeby zadeklarowac tablice
 
 1. **przypisywanie zmiennych**
 ```bash
-<nazwa_zmiennej>\=<typ_danych>
+<nazwa_zmiennej>=<typ_danych>
 number:
 x=1
 
@@ -56,26 +56,55 @@ x["apple"]=5
 ---
 
 2. **odwolywanie sie do tych zmiennych**
+```bash
+echo $<nazwa_zmiennej> -> przeczyta wartosc $<nazwa_zmiennej> (number, string)
 
+for <nazwa_pojedynczego_elementu> in ${<nazwa_tablicy>[@]}; do
+    echo $<nazwa_pojedynczego_elementu> -> odwolywanie sie do wartosci tablicy w bashu
+done
+
+for <nazwa_pojedynczego_elementu> in ${!<nazwa_tablicy>[@]}; do
+    echo $<nazwa_pojedynczego_elementu> -> odwolywanie sie do indexu tablicy 
+    echo ${<nazwa_tablicy>[$<nazwa_pojedynczego_elementu>]} -> odwolywanie sie do zawartosci tablicy o danym indexie
+done
+
+
+
+```
 ---
 
 3. **dzialania na zmiennych**
+```bash
+
+```
 
 ---
 
 4. **warunki i petle**
+```bash
+
+```
 
 ---
 
 5. **tabilce**
+```bash
+
+```
 
 ---
 
 6. **podawanie argumentow**
+```bash
+
+```
 
 ---
 
 7. **odwolywanie sie do innych plikow bash**
+```bash
+
+```
 
 ---
 #### Cele automatyzacji

@@ -38,6 +38,9 @@ assosciative array (tablica gdzie indexami sa stringi, zeby zadeklarowac tablice
 1. **przypisywanie zmiennych**
 ```bash
 <nazwa_zmiennej>=<typ_danych>
+bool:
+x=true
+x=false
 number:
 x=1
 
@@ -57,15 +60,15 @@ x["apple"]=5
 
 2. **odwolywanie sie do tych zmiennych**
 ```bash
-echo $<nazwa_zmiennej> -> przeczyta wartosc $<nazwa_zmiennej> (number, string)
+echo $<nazwa_zmiennej> #-> przeczyta wartosc $<nazwa_zmiennej> (number, string)
 
 for <nazwa_pojedynczego_elementu> in ${<nazwa_tablicy>[@]}; do
-    echo $<nazwa_pojedynczego_elementu> -> odwolywanie sie do wartosci tablicy w bashu
+    echo $<nazwa_pojedynczego_elementu> #-> odwolywanie sie do wartosci tablicy w bashu
 done
 
 for <nazwa_pojedynczego_elementu> in ${!<nazwa_tablicy>[@]}; do
-    echo $<nazwa_pojedynczego_elementu> -> odwolywanie sie do indexu tablicy 
-    echo ${<nazwa_tablicy>[$<nazwa_pojedynczego_elementu>]} -> odwolywanie sie do zawartosci tablicy o danym indexie
+    echo $<nazwa_pojedynczego_elementu> #-> odwolywanie sie do indexu tablicy 
+    echo ${<nazwa_tablicy>[$<nazwa_pojedynczego_elementu>]} #-> odwolywanie sie do zawartosci tablicy o danym indexie
 done
 
 
@@ -75,34 +78,135 @@ done
 
 3. **dzialania na zmiennych**
 ```bash
+#dodawnie
+value=$value1 + $value2
+#odjemowanie
+value=$value1 - $value2
+#mnozenie
+value=$value1 * $value2
+#dzielenie
+value=$value1 / $value2
+
+#konkatenacja stringow
+value=$value1$value2"przykladowy string"
+
 
 ```
 
 ---
 
 4. **warunki i petle**
-```bash
+zanim przystapimy do pokazywania warunkow i petli warto sie dowiedziec jak porownywac zmienne w warunkach, aby porownywac zmienne zazwyczaj uzywa sie specialnych operatorow:
+- -eq -> porownywanie zmiennych (equal), mozna tez uzywac "=="
+- -ne -> sprawdzenie czy zmienne sa inne (not equal)
+- -lt -> sprawdzenie czy zmienna jest mniejsza niz inna zmienna (lesser than)
+- -gt -> sprawdzenie czy zmienna jest wieksza niz inna zmienna (greater than)
+- -le -> sprawdzenie czy zmienna jest mniejsza lub rowna innej zmiennej (lesser or equal to)
+- -ge -> sprawdzenie czy zmienna jest wieksza lub rowna innej zmiennej (greater or equal to)
 
+
+```bash
+#if 
+if [ warunek ];then
+    kod...
+fi
+#przyklad
+if [$x -eq 5]; then
+    echo "x jest rowne 5"
+fi
+#if elseif
+if [ warunek ]; then
+    kod...
+elif [ inny warunek ]; then
+    inny_kod...
+fi
+
+#przyklad
+if [$x -le $y]; then
+    echo "x jest mniejsze niz y"
+elif [$x == $y]; then
+    echo "x jest rowne y"
+else; then
+    echo "x jest wieksze niz y"
+fi
+
+#if else
+if [warunek];then 
+    kod...
+else
+    inny_kod...
+fi
+#przyklad
+if [$x -eq $y]; then
+    echo "x jest rowne y"
+else
+    echo "x jest rozne od y"
+fi
+
+#for loop
+for i in ${1..5}; do
+    echo $i 
+done
+
+for i in ${array[@]}; do
+    echo $i
+done
+
+#while loop
+x=2
+while [ $x -le 5 ]; do
+    echo "Count is $x"
+    ((x++)) #postincrementation
+    #((++x)) preincrementacja
+done
+
+#until loop
+count=1
+until [ $count -gt 5 ]; do
+  echo "Count is $count"
+  ((count++))
+done
+
+#czym sie rozni while loop od until loopa
+#while loop wykonuje sie jesli warunek jest prawda a until loop wykonuje sie jesli warunek jest falszem
 ```
 
 ---
 
-5. **tabilce**
+5. odczyt od uzytkownika
 ```bash
+#aby odczytac input od uzytkownika trzeba uzyc read
+read -p "ile masz lat?: " wiek 
+echo $wiek
+read -pa "Co dzisiaj jadles?" array
+for i in ${array[@]}; do
+    echo $i
+done
 
 ```
-
+wiecej mozna przeczytac na [read man page](https://linuxcommand.org/lc3_man_pages/readh.html)
 ---
 
-6. **podawanie argumentow**
-```bash
+6. **podawanie argumentow z terminala**
+zazwyczaj argumenty przekazuje sie w nastepujacy sposob:
+./<nazwa_pliku>.sh arg1 arg2 arg3 arg4 ...
 
+```bash
+#aby odwolac sie do zmiennych z terminala mozna uzyc $1 $2 $3 $4 itd. $0 to jest nazwa pliku ktorego uzywamy
+#mozna tez uzyc $@ aby potraktowac te argumenty jakby byly w tablicy
+echo "Pierwszy argument: $1"
+echo "Drugi argument: $2"
+echo "Wszystkie argumenty: $@"
 ```
 
 ---
 
 7. **odwolywanie sie do innych plikow bash**
+aby odwolac sie do innych plikow .sh mozna uzyc komendy source
 ```bash
+source plik2.sh
+#i teraz nam sie tak jakby uruchomil plik2.sh i mozna np. odwolywac sie do jego zmiennych
+echo $plik2Int
 
 ```
 

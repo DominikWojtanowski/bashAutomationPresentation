@@ -204,7 +204,7 @@ echo "Wszystkie argumenty: $@"
 7. **odwolywanie sie do innych plikow bash**
 aby odwolac sie do innych plikow .sh mozna uzyc komendy source
 ```bash
-source plik2.sh
+source <sciezka_absolutna_do_plik2.sh> #innaczej trzeba patrzec na cwd
 #i teraz nam sie tak jakby uruchomil plik2.sh i mozna np. odwolywac sie do jego zmiennych
 echo $plik2Int
 
@@ -215,6 +215,10 @@ echo $plik2Int
 Glownym celem automatyzacji jest pozbycie sie potrzeby wlasnorecznego wykonywania tych zadań
 
 #### Jakie przyklady podam?
+1. Automatyczne sortowanie plikow wzgledem daty (examples/sortingFiles)
+2. Automatyczne aktualizowanie systemu przy uruchomieniu lub po jakims czasie(systemd jesli bedzie jesli nie to cronjob)
+3. Automatyczne backupowanie najwazniejszych plikow przy uruchomieniu
+4. czyszczenie folderow tymczasowych 
 
 
 

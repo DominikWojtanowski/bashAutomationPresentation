@@ -23,7 +23,8 @@ zatrzymują się jeśli komputer jest wstrzymany lub zatrzymany
 Teorytycznie jeśli chciałbyś uruchomić plik .service w jedym określonym momencie to wystarczy ci 
 ```ini
 [Install]
-WantedBy=... wystarczy np multi-user.target jesli chcesz zeby plik .service zostal uruchomiony po boocie
+WantedBy=... wystarczy np multi-user.target jesli chcesz zeby plik .service
+zostal uruchomiony po boocie
 ```
 Jednakże chciałbym pokazać troche więcej możliwości odnośnie uruchamiania procesów w określonym czasie
 więc będzie nam do tego potrzebny zarówno plik .service jak i .timer
@@ -36,24 +37,24 @@ więc będzie nam do tego potrzebny zarówno plik .service jak i .timer
 [Unit]
 Description=#opis
 Documentation=#lista do dokumenttacji poprzez lokalne strony man lub url, man:nazwa(nr) lub url
-Requires=#lista innych unitow ktore powinny byc uruchomione przed tym plikiem, cale uruchomienie pliku zakonczy sie niepowodzeniem jesli jakis plik sie nie uruchomi np: nazwa_pliku.service nazwa_pliku_2.service itp.
-Wants=#to samo co powyzej tylko ze jak jakiś plik sie nie uruchomi to sam plik będzie dalej działal
+Requires=#lista innych unitow ktore powinny byc uruchomione przed tym plikiem, \cale uruchomienie pliku zakonczy sie niepowodzeniem jesli jakis plik sie nie \uruchomi np: nazwa_pliku.service nazwa_pliku_2.service itp.
+Wants=#to samo co powyzej tylko ze jak jakiś plik sie nie uruchomi to sam plik \będzie dalej działal
 BindsTo=#To samo co Requires tylko nie uruchamia plikow
 Before=#wyznacza pliki które się uruchomią po tym pliku
 After=#odwrotność Before
-Conflicts=#Lista unitóœ które nie mogą być uruchomione w tym samym czasie jak ten unit uruchomienie unitu z tej listy spowoduje zatrzymanie innych unitow w tej liscie
-#Condition<nazwa_warunku>, np: ConditionPathExists=sciezka nie spelnienie tego warunku sprawi ze glowna jednostka bedzie pominieta, jednoakze inne jednostki z np wanted dalej beda sie uruchamiac
-#Assert<nazwa_warunku>, identycznie co z condition tylko ze nie spelnienie warunku skutkuje wywaleniem bledu i calkowitym nie uruchomieniem tego unitu
+Conflicts=#Lista unitóœ które nie mogą być uruchomione w tym samym czasie jak ten \unit uruchomienie unitu z tej listy spowoduje zatrzymanie innych unitow w tej liscie
+#Condition<nazwa_warunku>, np: ConditionPathExists=sciezka nie spelnienie tego \warunku sprawi ze glowna jednostka bedzie pominieta, jednoakze inne jednostki z \np wanted dalej beda sie uruchamiac
+#Assert<nazwa_warunku>, identycznie co z condition tylko ze nie spelnienie \warunku skutkuje wywaleniem bledu i calkowitym nie uruchomieniem tego unitu
 
 # ... inne linie specyficzne dla określonych 
 
 #ostatnia linia
 [Install] # ta sekcja jest opjonalna 
-WantedBy=#<nazwa_pliku>.target określa plik który spowoduje uruchomienie się tego unitu np. WantedBy=multi-user.target spowoduje uruchomienie sie unitu po boocie systemu
-RequiredBy=#to samo co powyżej z różnicą tego ze jak nie będzie tego pliku to plik sie nie uruchomi
+WantedBy=#<nazwa_pliku>.target określa plik który spowoduje uruchomienie się tego \unitu np. WantedBy=multi-user.target spowoduje uruchomienie sie unitu po boocie \systemu
+RequiredBy=#to samo co powyżej z różnicą tego ze jak nie będzie tego pliku to plik \sie nie uruchomi
 Alias=#pozwala nam uruchomic plik pod innym aliasem
-Also=#Kiedy aktywujesz plik poprzez systemctl enable <nazwa_pliku>.service to inne pliki z tej listy też się aktywują 
-DefaultInstance=#domyślna instancja która zostanie uruchomiona kiedy uaktywnisz plik poprzez systemctl enable nazwa_pliku, normalnie podczas tworzenia plikiow <nazwa_pliku>@instancja.service trzeba wyspecifikowac przy aktywowaniu pliku nazwe
+Also=#Kiedy aktywujesz plik poprzez systemctl enable <nazwa_pliku>.service to inne pliki \z tej listy też się aktywują 
+DefaultInstance=#domyślna instancja która zostanie uruchomiona kiedy uaktywnisz \plik poprzez systemctl enable nazwa_pliku, normalnie podczas tworzenia plikiow \<nazwa_pliku>@instancja.service trzeba wyspecifikowac przy aktywowaniu pliku nazwe
 
 ```
 

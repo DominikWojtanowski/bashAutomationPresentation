@@ -37,24 +37,28 @@ więc będzie nam do tego potrzebny zarówno plik .service jak i .timer
 [Unit]
 Description=#opis
 Documentation=#lista do dokumenttacji poprzez lokalne strony man lub url, man:nazwa(nr) lub url
-Requires=#lista innych unitow ktore powinny byc uruchomione przed tym plikiem, \cale uruchomienie pliku zakonczy sie niepowodzeniem jesli jakis plik sie nie \uruchomi np: nazwa_pliku.service nazwa_pliku_2.service itp.
-Wants=#to samo co powyzej tylko ze jak jakiś plik sie nie uruchomi to sam plik \będzie dalej działal
+Requires=#lista innych unitow ktore powinny byc uruchomione przed tym plikiem, cale uruchomienie pliku zakonczy sie niepowodzeniem jesli jakis plik sie nie 
+#uruchomi np: nazwa_pliku.service nazwa_pliku_2.service itp.
+Wants=#to samo co powyzej tylko ze jak jakiś plik sie nie uruchomi to sam plik będzie dalej działal
 BindsTo=#To samo co Requires tylko nie uruchamia plikow
 Before=#wyznacza pliki które się uruchomią po tym pliku
 After=#odwrotność Before
-Conflicts=#Lista unitóœ które nie mogą być uruchomione w tym samym czasie jak ten \unit uruchomienie unitu z tej listy spowoduje zatrzymanie innych unitow w tej liscie
-#Condition<nazwa_warunku>, np: ConditionPathExists=sciezka nie spelnienie tego \warunku sprawi ze glowna jednostka bedzie pominieta, jednoakze inne jednostki z \np wanted dalej beda sie uruchamiac
-#Assert<nazwa_warunku>, identycznie co z condition tylko ze nie spelnienie \warunku skutkuje wywaleniem bledu i calkowitym nie uruchomieniem tego unitu
+Conflicts=#Lista unitóœ które nie mogą być uruchomione w tym samym czasie jak ten unit uruchomienie unitu z tej listy spowoduje zatrzymanie innych unitow w tej liscie
+Condition<nazwa_warunku>, np: ConditionPathExists=sciezka nie spelnienie tego warunku sprawi ze glowna jednostka bedzie pominieta, jednoakze inne jednostki z
+#np wanted dalej beda sie uruchamiac
+Assert<nazwa_warunku>, identycznie co z condition tylko ze nie spelnienie warunku skutkuje wywaleniem bledu i calkowitym nie uruchomieniem tego unitu
 
 # ... inne linie specyficzne dla określonych 
 
 #ostatnia linia
 [Install] # ta sekcja jest opjonalna 
-WantedBy=#<nazwa_pliku>.target określa plik który spowoduje uruchomienie się tego \unitu np. WantedBy=multi-user.target spowoduje uruchomienie sie unitu po boocie \systemu
-RequiredBy=#to samo co powyżej z różnicą tego ze jak nie będzie tego pliku to plik \sie nie uruchomi
+WantedBy=#<nazwa_pliku>.target określa plik który spowoduje uruchomienie się tego unitu np. WantedBy=multi-user.target 
+#spowoduje uruchomienie sie unitu po boocie systemu
+RequiredBy=#to samo co powyżej z różnicą tego ze jak nie będzie tego pliku to plik sie nie uruchomi
 Alias=#pozwala nam uruchomic plik pod innym aliasem
-Also=#Kiedy aktywujesz plik poprzez systemctl enable <nazwa_pliku>.service to inne pliki \z tej listy też się aktywują 
-DefaultInstance=#domyślna instancja która zostanie uruchomiona kiedy uaktywnisz \plik poprzez systemctl enable nazwa_pliku, normalnie podczas tworzenia plikiow \<nazwa_pliku>@instancja.service trzeba wyspecifikowac przy aktywowaniu pliku nazwe
+Also=#Kiedy aktywujesz plik poprzez systemctl enable <nazwa_pliku>.service to inne pliki z tej listy też się aktywują 
+DefaultInstance=#domyślna instancja która zostanie uruchomiona kiedy uaktywnisz plik poprzez systemctl enable nazwa_pliku, normalnie podczas tworzenia plikow plikow 
+#<nazwa_pliku>@instancja.service trzeba wyspecifikowac przy aktywowaniu pliku nazwe
 
 ```
 
@@ -74,7 +78,8 @@ ExecStartPost=#identycznie jak powyżej tylko ze polecenia będą się uruchami
 ExecReload=#polecenia które się uruchomią jak zrestartujesz polecenie (systemctl restart ...)
 ExecStop=#komenda używana do zakończenia tego procesu (systemctl stop nazwa_pliku.service), jeśli nie będzie to proces zatrzyma się idealnie po zakończeniu
 ExecStopPost=#komendy używane po zatrzymaniu procesu
-Restart=#określa kiedy systemd ma restartować usługe, posiada wiele opcji: no, always(zawsze po zakonczeniu procesu), on_success, on_failure, on_abnormal(gdy proces zakończy się sygnałem np crash), on_abort(gdy proces )
+Restart=#określa kiedy systemd ma restartować usługe, posiada wiele opcji: no, always(zawsze po zakonczeniu procesu), on_success, on_failure, 
+#on_abnormal(gdy proces zakończy się sygnałem np crash), on_abort(gdy proces )
 RestartSec=#jeżeli automatyczne restartowanie jest uruchomione to ta komenda określa ile trzeba czekać przed następnym restartem
 TimeoutSec=#określa czas po którym systemd automatyczne uzna proces za nieuznany i go zabije
 

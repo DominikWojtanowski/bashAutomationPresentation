@@ -4,9 +4,9 @@ Okazuje się ze tak, postaram się omówić pliki .timer i .service z systemd
 ---
 ### Systemd
 ---
-Systemd to pierwszy proces który powstaje w linuxie, odpowiada za uruchamianie nastepnych 
+Systemd to pierwszy proces który powstaje w linuxie, odpowiada za uruchamianie następnych procesóœ
 i inicializowanie systemu, lecz nie insteresuje nas systemd w całości, tylko 
-jego część zajmująca sie uruchamianiem skryptów, procesów co jakiś czas.
+jego część zajmująca się uruchamianiem skryptów, procesów co pewien czas.
 
 ### Zegary z systemd 
 Co to jest zegary z systemd -> Zgodnie z definicją:
@@ -22,11 +22,17 @@ zatrzymują się jeśli komputer jest wstrzymany lub zatrzymany
 ### Po co nam pliki .timer i .service
 Teorytycznie jeśli chciałbyś uruchomić plik .service w jedym określonym momencie to wystarczy ci 
 ```ini
+[Unit]
+więcej informacji poniżej
+
+[Service]
+Więcej informacji poniżej
+
 [Install]
 WantedBy=... wystarczy np multi-user.target jesli chcesz zeby plik .service
 zostal uruchomiony po boocie
 ```
-Jednakże chciałbym pokazać troche więcej możliwości odnośnie uruchamiania procesów w określonym czasie
+Jednak chciałbym pokazać troche więcej możliwości odnośnie uruchamiania procesów w określonym czasie
 więc będzie nam do tego potrzebny zarówno plik .service jak i .timer
 
 
@@ -81,7 +87,8 @@ ExecStopPost=#komendy używane po zatrzymaniu procesu
 Restart=#określa kiedy systemd ma restartować usługe, posiada wiele opcji: no, always(zawsze po zakonczeniu procesu), on_success, on_failure, 
 #on_abnormal(gdy proces zakończy się sygnałem np crash), on_abort(gdy proces )
 RestartSec=#jeżeli automatyczne restartowanie jest uruchomione to ta komenda określa ile trzeba czekać przed następnym restartem
-TimeoutSec=#określa czas po którym systemd automatyczne uzna proces za nieuznany i go zabije
+TimeoutSec=#określa czas po którym systemd automatyczne uzna proces za nieudany i go zabije
+SuccessExitStatus=int1 int2 ... #określa kody wyjścia które może wysłać plik, które nie będą uznane za błedy
 
 
 
@@ -118,7 +125,7 @@ WakeSystem=#pozwala wybudzic system jesli jest uśpiony i nadchodzi czas wykonan
 
 
 ### Jak ustawić pliki zeby systemd nam automatycznie to uruchamiał
-1. Stwórz plik który coś robi
+1. Napisz skrypt
 2. Nadaj mu uprawnienia do wykonywania
 3. Stwórz odpowiednie pliki .timer i .service ( w /etc/systemd/system ) globalnie lub dla jednego użytkownika ( /home/użytkownik/.config/systemd/user)
 4. Przeładuj konfiguracje systemd (sudo systemctl daemon-reload ewentualnie systemctl --user daemon-reload)
@@ -133,5 +140,4 @@ Więcej informacji można poczytać na:
 - [Open SUSE](https://documentation.suse.com/smart/systems-management/html/systemd-working-with-timers/index.html)
 - [Arch Wiki](https://wiki.archlinux.org/title/Systemd/Timers)
 - [Digital Ocean](https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files)
-
 

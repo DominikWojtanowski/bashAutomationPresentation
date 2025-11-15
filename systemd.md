@@ -120,7 +120,7 @@ WakeSystem=#pozwala wybudzic system jesli jest uśpiony i nadchodzi czas wykonan
 ### Jak ustawić pliki zeby systemd nam automatycznie to uruchamiał
 1. Stwórz plik który coś robi
 2. Nadaj mu uprawnienia do wykonywania
-3. Stwórz odpowiednie pliki .timer i .service ( w /etc/systemd/system )
+3. Stwórz odpowiednie pliki .timer i .service ( w /etc/systemd/system ) globalnie lub dla jednego użytkownika ( /home/użytkownik/.config/systemd/user)
 4. Przeładuj konfiguracje systemd (sudo systemctl daemon-reload ewentualnie systemctl --user daemon-reload)
 5. Uruchom plik .timer (sudo systemctl enable --now <nazwa_pliku>.timer ewentualnie systemctl --user enable --now <nazwa_pliku>.timer)
 

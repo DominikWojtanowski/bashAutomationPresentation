@@ -143,7 +143,7 @@ else
 fi
 
 #for loop
-for i in ${1..5}; do
+for i in {1..5}; do
     echo $i 
 done
 
